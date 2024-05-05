@@ -17,9 +17,9 @@ func main() {
 		panic(err)
 	}
 
-	for i := 0; i < 5; i++ {
+	for i := 0; i < 3; i++ {
 		ctx, cancel := context.WithTimeout(ctx, 2*time.Second)
-		_, err = mgr.Produce(ctx, "testing-kafka", "", [][]byte{[]byte("hello")})
+		_, err = mgr.Produce(ctx, "testing-kafka", "datakaveri", [][]byte{[]byte("hello")})
 		cancel()
 
 		if err != nil {

@@ -36,7 +36,6 @@ type Callback func(*kafka.Reader, *sync.WaitGroup)
 // Reader specific settings
 type ConsumerSettings struct {
 	Topic          string
-	Partition      int
 	GroupID        string
 	Callback       Callback
 	Offset         int64
@@ -67,7 +66,7 @@ func DefaultProducerSettings() *ProducerSettings {
 	return &ProducerSettings{}
 }
 
-func DefaultConsumerSettings(topic string, partition int, startOffset int64, callback Callback) *ConsumerSettings {
+func DefaultConsumerSettings(topic string, startOffset int64, callback Callback) *ConsumerSettings {
 	return &ConsumerSettings{
 		Topic:          topic,
 		Callback:       callback,
@@ -105,8 +104,8 @@ func (m *KafkaManager) getNewWriter() *kafka.Writer {
 func (m *KafkaManager) getNewReader(c *ConsumerSettings) *kafka.Reader {
 	return kafka.NewReader(kafka.ReaderConfig{
 		Topic:             c.Topic,
-		GroupID:           c.GroupID,
 		Brokers:           m.settings.Brokers,
+		GroupID:           c.GroupID,
 		StartOffset:       c.Offset,
 		ReadBackoffMin:    c.ReadBackoffMin,
 		ReadBackoffMax:    c.ReadBackoffMax,

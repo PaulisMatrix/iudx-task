@@ -21,8 +21,8 @@ func main() {
 		panic(err)
 	}
 
-	consumer := kafkamgr.DefaultConsumerSettings("testing-kafka", 0, kafka.FirstOffset, kafkamgr.Callback(handleMsg))
-	consumer.GroupID = "test-consumer-group"
+	consumer := kafkamgr.DefaultConsumerSettings("testing-kafka", kafka.LastOffset, kafkamgr.Callback(handleMsg))
+	consumer.GroupID = "flink-job"
 	if err := mgr.AddConsumer(consumer); err != nil {
 		logrus.WithError(err).Fatalln("failed to add the consumer")
 	}
