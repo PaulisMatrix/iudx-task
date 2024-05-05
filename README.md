@@ -30,4 +30,8 @@
 
     * [events](./events/) - events package. add support for different events here.
 
+* Overall architecture:
+
+    ![architecture](datakaveri.png)
+
 * 
