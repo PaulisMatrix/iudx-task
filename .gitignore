@@ -21,3 +21,5 @@
 go.work
 
 **/*.jar
+
+**/*.DS_Store
