@@ -34,4 +34,17 @@
 
     ![architecture](datakaveri.png)
 
+* On what basis you will do batch processing/transformations?
+
+    1. `User centric metrics`: metrics stored and sorted by per day timestamps
+
+        * Overall time spent on the website<br>
+        * Most common recorded event for a particular user<br>
+        * Click-through rates<br>
+
+* How would you do stateful stream processing? (Flinks' DataStream API seems suitable for this approach.)
+    * Process and perform aggregations of events in batches depending on the window time set.
+    * Incremental processing as new events arrive in the given window, and update the aggregated metrics accordingly.
+    * Dump the metrics to some storage sink.
+    * Key partitioning based on UserID ensuring events for a particular user are processed by the same flink job.
 * 
